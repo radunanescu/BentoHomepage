@@ -44,14 +44,50 @@ function getWeather(latitude, longitude) {
             return response.json();
         })
         .then(function(data) {
+            // Accessing the temperature in the data response
             let temperatureData = data.properties.timeseries[0].data.instant.details.air_temperature;
             let celsius = Math.floor(temperatureData);
 
+            // Assuming you're storing temperature in the weather object
             weather.temperature.value = tempUnit == 'C' ? celsius : (celsius * 9) / 5 + 32;
 
-            weather.description = `Cloud coverage: ${data.properties.timeseries[0].data.instant.details.cloud_area_fraction}%`;
+            // Accessing the cloud coverage as a weather description
+            let cloudCoverage = weather.description = `Cloud coverage: ${data.properties.timeseries[0].data.instant.details.cloud_area_fraction}%`;
 
-            weather.iconId = "default_icon";
+            let precipitationAmount = data.properties.timeseries[0].data.next_1_hours.details.precipitation_amount;
+
+     	    if (cloudCoverage > 0) {
+                weather.description += `, Cloud coverage: ${precipitationAmount}mm`;
+            }
+		
+            // Only add precipitation to the description if it's above 0mm
+            if (precipitationAmount > 0) {
+                weather.description += `, Precipitation: ${precipitationAmount}mm`;
+            }
+
+            // Accessing the weather symbol code for the last hour
+            let symbolCode = data.properties.timeseries[0].data.next_1_hours.summary.symbol_code;
+
+            // Map symbolCode to Lucide icon name
+            const iconMap = {
+                "clearsky_day": "sun",
+                "clearsky_night": "moon",
+                "partlycloudy_day": "cloud-sun",
+                "partlycloudy_night": "cloud-moon",
+                "cloudy": "cloud",
+                "rain": "cloud-rain",
+                "lightrain": "cloud-drizzle",
+                "heavyrain": "cloud-rain-heavy",
+                "snow": "cloud-snow",
+                "lightsnow": "cloud-snow-light",
+                "heavysnow": "cloud-snow-heavy",
+                "fog": "cloud-fog",
+                "sleet": "cloud-sleet",
+                "thunderstorm": "cloud-lightning"
+            };
+
+            // Set the appropriate iconId based on the symbol code
+            weather.iconId = iconMap[symbolCode] || "cloud"; // default to "cloud" if no match
         })
         .then(function() {
             displayWeather();
@@ -59,7 +95,11 @@ function getWeather(latitude, longitude) {
 }
 
 function displayWeather() {
-    iconElement.innerHTML = `<img src="assets/icons/${CONFIG.weatherIcons}/${weather.iconId}.png"/>`;
+    // Use Lucide icons in your HTML
+    iconElement.innerHTML = `<i data-lucide="${weather.iconId}" class="lucide-icon"></i>`;
     tempElement.innerHTML = `${weather.temperature.value.toFixed(0)}°<span class="darkfg">${tempUnit}</span>`;
     descElement.innerHTML = weather.description;
+
+    // Ensure Lucide icons are properly rendered
+    lucide.createIcons();
 }
