@@ -147,6 +147,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .clock {
@@ -184,11 +185,23 @@ body {
   height: 70px;
 }
 
+.weatherIcon svg {
+  width: 100%;
+  min-height: 60px;
+  fill: #fff;
+  stroke: #fff;
+}
+
 .weatherValue p {
   font-size: var(--fg-secondary);
   font-weight: bolder;
   margin-left: 15px;
   color: var(--fg);
+}
+
+.weatherDescription {
+  width: 100%;
+  text-align: center;
 }
 
 .weatherDescription p {
