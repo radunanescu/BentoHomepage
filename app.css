@@ -189,8 +189,8 @@ body {
 .weatherIcon svg {
   width: 100%;
   min-height: 60px;
-  fill: #fff;
-  stroke: #fff;
+  fill: var(--fg);
+  stroke: var(--fg);
 }
 
 .weatherValue p {
