@@ -16,7 +16,7 @@
   - [📐 Layouts: Bento, Lists and Buttons.](#-layouts-bento-lists-and-buttons)
   - [🏷️ Buttons \& Links](#️-buttons--links)
   - [📑 Lists \& Links](#-lists--links)
-  - [⛈️ Weather: Api Key, Icons and Unit](#️-weather-api-key-icons-and-unit)
+  - [⛈️ Weather:](#️-weather-icons-and-unit)
   - [💛 Colors](#-colors)
   - [🌑 Auto change theme](#-auto-change-theme)
 
@@ -201,18 +201,13 @@ The same happens with the list links, you can change the list icon (also using L
   ],
 ```
 
-### ⛈️ Weather: Api Key, Icons and Unit
+### ⛈️ Weather: This fork no longer requires an api key 
 
-For setting up the Weather widget you'll need an API Key from: `https://openweathermap.org/`. Once you have your Key you'll need to set your latitude and longitude, you can use: `https://www.latlong.net/` to get them. 
+For setting up the Weather widget you'll need to set your latitude and longitude, you can use: `https://www.latlong.net/` to get them. 
+The api is no longer openweathermap and its provided by https://api.met.no/ the same api that KDE Weather uses
 
 Finally, choose an Icon set:
-
-![](assets/img/icons.png)
-
-- **Nord** Using the Nord Color Scheme and easy-to-eyes colors
-- **OneDark** (_Default one_) Using the One Dark Pro color scheme
-- **Dark** For White theme only users that want a minimalist look
-- **White** For Dark theme only users that want a minimalist look
+The icons are no longer defined it uses the same icons as the whole page
 
 Finally just add them to the `config.js` file.
 
