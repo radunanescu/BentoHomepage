@@ -52,7 +52,7 @@ function getWeather(latitude, longitude) {
             weather.temperature.value = tempUnit == 'C' ? celsius : (celsius * 9) / 5 + 32;
 
             // Accessing the cloud coverage as a weather description
-            let cloudCoverage = weather.description = `Cloud coverage: ${data.properties.timeseries[0].data.instant.details.cloud_area_fraction}%`;
+            let cloudCoverage = data.properties.timeseries[0].data.instant.details.cloud_area_fraction;
 
             let precipitationAmount = data.properties.timeseries[0].data.next_1_hours.details.precipitation_amount;
 
