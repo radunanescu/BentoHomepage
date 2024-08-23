@@ -57,10 +57,9 @@ function getWeather(latitude, longitude) {
             let precipitationAmount = data.properties.timeseries[0].data.next_1_hours.details.precipitation_amount;
 
      	    if (cloudCoverage > 0) {
-                weather.description += `, Cloud coverage: ${precipitationAmount}mm`;
+                weather.description += `, Cloud coverage: ${cloudCoverage}%`;
             }
 		
-            // Only add precipitation to the description if it's above 0mm
             if (precipitationAmount > 0) {
                 weather.description += `, Precipitation: ${precipitationAmount}mm`;
             }
@@ -86,7 +85,6 @@ function getWeather(latitude, longitude) {
                 "thunderstorm": "cloud-lightning"
             };
 
-            // Set the appropriate iconId based on the symbol code
             weather.iconId = iconMap[symbolCode] || "cloud"; // default to "cloud" if no match
         })
         .then(function() {
